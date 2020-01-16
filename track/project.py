@@ -81,6 +81,7 @@ class Project(object):
         # TODO: having s3 logic split between project and sync.py
         # worries me
         local = os.path.join(self.log_dir, trial_id, prefix)
+        os.makedirs(local, exist_ok=True)
         if self.upload_dir:
             remote = "/".join([self.upload_dir, trial_id, prefix])
             _remote_to_local_sync(remote, local)
@@ -88,6 +89,7 @@ class Project(object):
 
     def _sync_metadata(self):
         local = os.path.join(self.log_dir, constants.METADATA_FOLDER)
+        os.path.makedirs(local, exist_ok=True)
         if self.upload_dir:
             remote = "/".join([self.upload_dir, constants.METADATA_FOLDER])
             _remote_to_local_sync(remote, local)
